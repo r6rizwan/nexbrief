@@ -1,6 +1,6 @@
 {
-    "name": "meeting_summarizer_flutter",
-    "short_name": "meeting_summarizer_flutter",
+    "name": "nexbrief",
+    "short_name": "nexbrief",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

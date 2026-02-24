@@ -1,4 +1,4 @@
-package com.example.meeting_summarizer_flutter
+package com.rizwan.nexbrief
 
 import io.flutter.embedding.android.FlutterActivity
 

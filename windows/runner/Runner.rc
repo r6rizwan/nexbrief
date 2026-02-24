@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "meeting_summarizer_flutter" "\0"
+            VALUE "FileDescription", "nexbrief" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "meeting_summarizer_flutter" "\0"
+            VALUE "InternalName", "nexbrief" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "meeting_summarizer_flutter.exe" "\0"
-            VALUE "ProductName", "meeting_summarizer_flutter" "\0"
+            VALUE "OriginalFilename", "nexbrief.exe" "\0"
+            VALUE "ProductName", "nexbrief" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

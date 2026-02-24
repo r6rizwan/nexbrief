@@ -1,30 +1,32 @@
-# Meeting Summarizer Flutter
+# NexBrief
 
-Flutter app for:
-- Recording meeting audio
-- Transcribing audio with OpenAI (`gpt-4o-transcribe`)
-- Extracting action items (`title`, `owner`, `due`, `category`) using AI or rule-based fallback
-- Exporting result to Markdown (`.md`) in app documents folder
+Flutter meeting summarizer for side projects.
+
+## Features
+- Paste/edit meeting transcript
+- Generate structured summary locally (`key points`, `decisions`, `risks`, `next steps`)
+- Extract action items locally (`title`, `owner`, `due`, `category`)
+- Edit action items before export
+- Save meeting history on-device
+- Export Markdown (`.md`) and delete exported files from the app
 
 ## Setup
 ```bash
-cd "/Users/rizwan/Documents/New project/meeting_summarizer_flutter"
+cd "/Users/rizwan/Documents/GitHub/nexbrief"
 flutter pub get
 flutter run
 ```
 
-## How to use
-1. Enter OpenAI API key.
-2. Tap `Start Recording`, then `Stop Recording`.
-3. Tap `Transcribe (OpenAI)`.
-4. Tap `Extract with AI` (or `Extract Rule-Based`).
+## How To Use
+1. Paste transcript in the `Transcript` section.
+2. Tap `Generate Summary`.
+3. Tap `Run Rule Extraction`.
+4. Edit action items in `Action Items`.
 5. Tap `Generate + Export Markdown`.
+6. Use `Meeting History` to load/delete entries.
 
-## Permissions
-- Android microphone permission is already added in:
-  - `android/app/src/main/AndroidManifest.xml`
-- iOS microphone usage description is already added in:
-  - `ios/Runner/Info.plist`
-
-## Important note
-API key is currently entered in-app for MVP speed. For production, move OpenAI calls to your backend and never expose raw API keys on client devices.
+## Scope
+- Standalone side-project app
+- No backend
+- No API key required
+- Local storage only
