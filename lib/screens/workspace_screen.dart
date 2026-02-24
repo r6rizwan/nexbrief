@@ -194,60 +194,136 @@ class WorkspaceScreen extends StatelessWidget {
                     final index = entry.key;
                     final item = entry.value;
                     final accent = categoryColor(item.category);
-                    return Container(
-                      margin: const EdgeInsets.only(bottom: 8),
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: const Color(0xFFD8CEBC)),
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 6,
-                            height: 54,
-                            decoration: BoxDecoration(
-                              color: accent,
-                              borderRadius: BorderRadius.circular(999),
-                            ),
+                    return LayoutBuilder(
+                      builder: (context, constraints) {
+                        final compact = constraints.maxWidth < 380;
+                        return Container(
+                          margin: const EdgeInsets.only(bottom: 8),
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: const Color(0xFFD8CEBC)),
                           ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  item.title,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                          child: compact
+                              ? Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                          width: 6,
+                                          height: 54,
+                                          decoration: BoxDecoration(
+                                            color: accent,
+                                            borderRadius: BorderRadius.circular(
+                                              999,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                item.title,
+                                                style: const TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                              Text(
+                                                'Owner: ${item.owner} | Due: ${item.due}',
+                                              ),
+                                              Text(
+                                                item.category,
+                                                style: TextStyle(color: accent),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 6),
+                                    Wrap(
+                                      spacing: 8,
+                                      children: [
+                                        OutlinedButton.icon(
+                                          onPressed: isBusy
+                                              ? null
+                                              : () => onEditItem(item, index),
+                                          icon: const Icon(Icons.edit_outlined),
+                                          label: const Text('Edit'),
+                                        ),
+                                        OutlinedButton.icon(
+                                          onPressed: isBusy
+                                              ? null
+                                              : () => onDeleteItem(index),
+                                          icon: const Icon(
+                                            Icons.delete_outline,
+                                          ),
+                                          label: const Text('Delete'),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                )
+                              : Row(
+                                  children: [
+                                    Container(
+                                      width: 6,
+                                      height: 54,
+                                      decoration: BoxDecoration(
+                                        color: accent,
+                                        borderRadius: BorderRadius.circular(
+                                          999,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            item.title,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Owner: ${item.owner} | Due: ${item.due}',
+                                          ),
+                                          Text(
+                                            item.category,
+                                            style: TextStyle(color: accent),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Column(
+                                      children: [
+                                        IconButton(
+                                          onPressed: isBusy
+                                              ? null
+                                              : () => onEditItem(item, index),
+                                          icon: const Icon(Icons.edit_outlined),
+                                        ),
+                                        IconButton(
+                                          onPressed: isBusy
+                                              ? null
+                                              : () => onDeleteItem(index),
+                                          icon: const Icon(
+                                            Icons.delete_outline,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                                Text('Owner: ${item.owner} | Due: ${item.due}'),
-                                Text(
-                                  item.category,
-                                  style: TextStyle(color: accent),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Column(
-                            children: [
-                              IconButton(
-                                onPressed: isBusy
-                                    ? null
-                                    : () => onEditItem(item, index),
-                                icon: const Icon(Icons.edit_outlined),
-                              ),
-                              IconButton(
-                                onPressed: isBusy
-                                    ? null
-                                    : () => onDeleteItem(index),
-                                icon: const Icon(Icons.delete_outline),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                        );
+                      },
                     );
                   }),
               ],
@@ -277,6 +353,7 @@ class WorkspaceScreen extends StatelessWidget {
                   controller: markdownController,
                   minLines: 6,
                   maxLines: 14,
+                  readOnly: true,
                   decoration: const InputDecoration(
                     labelText: 'Markdown Preview',
                   ),

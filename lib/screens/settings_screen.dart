@@ -39,7 +39,35 @@ class SettingsScreen extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           OutlinedButton.icon(
-            onPressed: onClearWorkspace,
+            onPressed: () async {
+              final shouldClear =
+                  await showDialog<bool>(
+                    context: context,
+                    builder: (dialogContext) {
+                      return AlertDialog(
+                        title: const Text('Clear Workspace'),
+                        content: const Text(
+                          'This clears transcript, summary, action items, and markdown preview from the current workspace.',
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () =>
+                                Navigator.of(dialogContext).pop(false),
+                            child: const Text('Cancel'),
+                          ),
+                          FilledButton(
+                            onPressed: () =>
+                                Navigator.of(dialogContext).pop(true),
+                            child: const Text('Clear'),
+                          ),
+                        ],
+                      );
+                    },
+                  ) ??
+                  false;
+              if (!shouldClear) return;
+              onClearWorkspace();
+            },
             icon: const Icon(Icons.clear_all_outlined),
             label: const Text('Clear Workspace'),
           ),

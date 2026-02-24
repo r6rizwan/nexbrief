@@ -69,7 +69,41 @@ class HistoryScreen extends StatelessWidget {
                             label: const Text('Load'),
                           ),
                           OutlinedButton.icon(
-                            onPressed: isBusy ? null : () => onDelete(entry),
+                            onPressed: isBusy
+                                ? null
+                                : () async {
+                                    final shouldDelete =
+                                        await showDialog<bool>(
+                                          context: context,
+                                          builder: (dialogContext) {
+                                            return AlertDialog(
+                                              title: const Text(
+                                                'Delete Meeting',
+                                              ),
+                                              content: const Text(
+                                                'This removes the history item and its markdown file. Continue?',
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () => Navigator.of(
+                                                    dialogContext,
+                                                  ).pop(false),
+                                                  child: const Text('Cancel'),
+                                                ),
+                                                FilledButton(
+                                                  onPressed: () => Navigator.of(
+                                                    dialogContext,
+                                                  ).pop(true),
+                                                  child: const Text('Delete'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        ) ??
+                                        false;
+                                    if (!shouldDelete) return;
+                                    await onDelete(entry);
+                                  },
                             icon: const Icon(Icons.delete_outline),
                             label: const Text('Delete'),
                           ),
