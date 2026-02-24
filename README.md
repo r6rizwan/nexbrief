@@ -12,7 +12,6 @@ Flutter meeting summarizer for side projects.
 
 ## Setup
 ```bash
-cd "/Users/rizwan/Documents/GitHub/nexbrief"
 flutter pub get
 flutter run
 ```
