@@ -1,4 +1,4 @@
-package com.rizwan.nexbrief
+package com.nexbrief.app
 
 import io.flutter.embedding.android.FlutterActivity
 
